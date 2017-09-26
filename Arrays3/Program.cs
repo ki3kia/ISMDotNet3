@@ -44,6 +44,7 @@ namespace Arrays3
                         N = N + 1;
                 }
             }
+
             Console.WriteLine($"Количество положительных еллементов : {N}");
             int max = minRange;
             int x = m * n;
@@ -229,7 +230,7 @@ namespace Arrays3
                         kq = 1;
                 }
                 if (kq == 1)
-                    Console.WriteLine($"Сума чисел в столбцах с отрицательніми єлементами: {suma}");
+                    Console.WriteLine($"Сума чисел в столбцах с отрицательными єлементами: {suma}");
             }
         }
     }
