@@ -8,7 +8,7 @@ namespace ClassLibrary1
 {
     public class Matrix
     {
-        public static int PositiveElements(double [,] integers)
+        public static int PositiveElements(int [,] integers)
         {
             int N = 0;
             for (int i = 0; i < integers.GetLength(0); i++)
@@ -21,18 +21,22 @@ namespace ClassLibrary1
             }
             return N;
         }
-        public static double MaxElement (double[,] integers)
+        public static int MaxElement (int[,] integers)
         {
-            double max = 0;
-            double a = 0;
+            int max = 0;
+            int a = 0;
             int x = 0;
-            double[] arr = new double[x];
+            int[] arr = new int[x];
             for (int i = 0; i < integers.GetLength(0); i++)
             {
                 for (int j = 0; j < integers.GetLength(1); j++)
                 {
-                    arr[x] = integers[i, j];
-                    x++;
+                    while (x < arr.Length)
+                    {
+                        arr[x] = integers[i, j];
+                        x++;
+                    }
+                        
                 }
             }
             for (int i = 0; i < integers.GetLength(0) * integers.GetLength(0); i++)
@@ -57,17 +61,20 @@ namespace ClassLibrary1
             }
             return max;
         }
-        public static int NotZeroRows (double[,] integers)
+        public static int NotZeroRows (int[,] integers)
         {
             int zero = 0;
             int x = 0;
-            double[] arr = new double[x];
+            int[] arr = new int[x];
             for (int i = 0; i < integers.GetLength(0); i++)
             {
                 for (int j = 0; j < integers.GetLength(1); j++)
                 {
-                    arr[x] = integers[i, j];
-                    x++;
+                    while (x < arr.Length)
+                    {
+                        arr[x] = integers[i, j];
+                        x++;
+                    }
                 }
             }
             for (int i = 0; i < integers.GetLength(0) * integers.GetLength(0); i++)
@@ -84,7 +91,7 @@ namespace ClassLibrary1
             zero = integers.GetLength(0) - zero;
             return zero;
         }
-        public static int NotZero (double[,] integers)
+        public static int NotZero (int[,] integers)
         {
             int zero2 = 0;
             for (int i = 0; i < integers.GetLength(0); i++)
@@ -101,7 +108,7 @@ namespace ClassLibrary1
             zero2 = integers.GetLength(1) + zero2;
             return zero2;
         }
-        public static int RowSeria(double[,] integers)
+        public static int RowSeria(int[,] integers)
         {
             int maxr = 0, indx =0;
             for (int i = 0; i < integers.GetLength(0); i++)
@@ -122,9 +129,9 @@ namespace ClassLibrary1
             }
             return indx;
         }
-        public static void PositiveMultiplicate(double[,] integers)
+        public static void PositiveMultiplicate(int[,] integers)
         {
-            double d;
+            int d;
             for (int i = 0; i < integers.GetLength(0); i++)
             {
                 d = 1;
@@ -138,7 +145,7 @@ namespace ClassLibrary1
                 Console.WriteLine("Произведение {0}", d);
             }
         }
-        public static void PositiveSum(double[,] integers)
+        public static void PositiveSum(int[,] integers)
         {
             double s;
             for (int i = 0; i < integers.GetLength(0); i++)
@@ -157,15 +164,22 @@ namespace ClassLibrary1
                 Console.WriteLine("Сумма {0}", s);
             }
         }
-        public static double Tranpouse(double[,] integers)
+        public static void Tranpouse(int[,] integers)
         {
-            double[,] resultMatr = new double [integers.GetLength(1), integers.GetLength(0)];
+            int[,] resultMatr = new int [integers.GetLength(1), integers.GetLength(0)];
             for (int i = 0; i < integers.GetLength(0); i++)
                 for (int j = 0; j < integers.GetLength(1); j++)
                     resultMatr[j, i] = integers[i, j];
-            return resultMatr[integers.GetLength(1), integers.GetLength(0)];
+            for (int i = 0; i < resultMatr.GetLength(0); i++)
+            {
+                for (int j = 0; j < resultMatr.GetLength(1); j++)
+                {
+                    Console.Write($"{resultMatr[i, j],4}");
+                }
+                Console.WriteLine();
+            }
         }
-        public static void DiagonalSum (double[,] integers)
+        public static int DiagonalSum (int[,] integers)
         {
             int[,] resultMatr = new int[integers.GetLength(1), integers.GetLength(0)];
             for (int i = 0; i < resultMatr.GetLength(0); i++)
@@ -176,33 +190,35 @@ namespace ClassLibrary1
                 }
                 Console.WriteLine();
             }
-            double[] arr3 = new double[integers.GetLength(0) - 1];
+            int[] arr3 = new int[integers.GetLength(0) - 1];
             int x1 = 1;
             int q = 0;
             for (int i = 0; i < integers.GetLength(0); i++)
             {
                 for (int j = 0; j < resultMatr.GetLength(1); j++)
                 {
-                    arr3[q] = arr3[q] + integers[i, j];
-                    q++;
-                    if (q == integers.GetLength(0) - 2)
-                        break;
+                    while (q <= integers.GetLength(0) - 2)
+                    {
+                        arr3[q] = arr3[q] + integers[i, j];
+                        q++;
+                    }
                 }
                 x1++;
             }
-            double[] arr2 = new double[integers.GetLength(0) - 1];
+            int[] arr2 = new int[integers.GetLength(0) - 1];
             for (int i = 0; i < integers.GetLength(0); i++)
             {
                 int xn = i - 1;
                 for (int j = 0; j < resultMatr.GetLength(1); j++)
                 {
-                    arr2[xn] = arr2[xn] + integers[i, j];
-                    if (xn == 0)
-                        break;
-                    xn--;
+                    while (xn >= 0)
+                    {
+                        arr2[xn] = arr2[xn] + integers[i, j];
+                        xn--;
+                    }
                 }
             }
-            double maxd = 0;
+            int maxd = 0;
             for (int i = 0; i < arr3.GetLength(0); i++)
             {
                 if (arr3[i] > maxd)
@@ -213,9 +229,9 @@ namespace ClassLibrary1
                 if (arr2[i] > maxd)
                     maxd = arr2[i];
             }
-            Console.WriteLine($"Самая большая сумма чисел диагоналей паралельных главной: {maxd}");
+            return maxd;
         }
-        public static void SumNegative (double[,] integers)
+        public static void SumNegative (int[,] integers)
         {
             int k;
             int[,] resultMatr = new int[integers.GetLength(1), integers.GetLength(0)];
@@ -236,9 +252,9 @@ namespace ClassLibrary1
     }
     public class Arrays
     {
-        public static double ProductNeg(double[] integers)
+        public static int ProductNeg(int[] integers)
         {
-            double d = 0, min = integers[0];
+            int d = 0, min = integers[0];
             int index=0;
             for (int i = 0; i < integers.Length; i++)
             {
@@ -252,7 +268,7 @@ namespace ClassLibrary1
             }
             return d;
         }
-        public static double SumBetweenPandN(int[] integers)
+        public static int SumBetweenPandN(int[] integers)
         {
             int Modmax = Math.Abs(integers[0]), Modmin = Math.Abs(integers[0]), b = 0, s = 0, a = 0;
             for (int i = 0; i < integers.Length; i++)
@@ -281,14 +297,13 @@ namespace ClassLibrary1
                     break;
                 }
             }
-            Console.WriteLine($"index: {a}");
             for (int i = b + 1; i < a; i++)
             {
                 s = s + integers[i];
             }
             return s;
         }
-        public static double SumBetweenZeros(int[] integers)
+        public static int SumBetweenZeros(int[] integers)
         {
             int zero1 = 0, zero2 = 0, s2 = 0;
             for (int i = 0; i < integers.Length; i++)
@@ -310,7 +325,7 @@ namespace ClassLibrary1
             }
             return s2; 
         }
-        public static double ProductBetweenMaxMin(int[] integers)
+        public static int ProductBetweenMaxMin(int[] integers)
         {
             int Modmax = Math.Abs(integers[0]), Modmin = Math.Abs(integers[0]), d2 = 0;
             for (int i = 0; i < integers.Length; i++)
@@ -336,9 +351,9 @@ namespace ClassLibrary1
             }
             return d2;
         }
-        public static double SumBetweenMaxMin(int[] integers)
+        public static double SumNeg (double[] integers)
         {
-            int s = 0;
+            double s = 0;
             for (int i = 0; i < integers.Length; i++)
             {
                 if (integers[i] < 0)
@@ -346,9 +361,9 @@ namespace ClassLibrary1
             }
             return s;
         }
-        public static double Max(int[] integers)
+        public static double Max(double[] integers)
         {
-            int max = integers[0];
+            double max = integers[0];
             for (int i = 0; i < integers.Length; i++)
             {
                 if (max < integers[i])
@@ -358,9 +373,10 @@ namespace ClassLibrary1
             }
             return max;
         }
-        public static int MaxIndex(int[] integers)
+        public static int MaxIndex(double[] integers)
         {
-            int max = integers[0], index = 0;
+            double max = integers[0]; 
+            int index = 0;
             for (int i = 0; i < integers.Length; i++)
             {
                 if (max < integers[i])
@@ -382,9 +398,9 @@ namespace ClassLibrary1
             }
             return maxMod;
         }
-        public static double SumPositive (double[] integers)
+        public static int SumPositive (double[] integers)
         {
-            double sInx = 0;
+            int sInx = 0;
             for (int i = 0; i < integers.Length; i++)
             {
                 if (integers[i] > 0)

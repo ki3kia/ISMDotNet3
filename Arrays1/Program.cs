@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibrary1;
 
 namespace Arrays1
 {
@@ -26,43 +27,16 @@ namespace Arrays1
                 Console.WriteLine($"arr1[{i}] = {arr1[i]}");
             }
             double max = arr1[0], index = 0, maxMod= arr1[0], indexMod=0, sInx=0, s=0;
-            for (int i=0; i<arr1.Length; i++)
-            {
-                if (arr1[i]<0)          
-                    s = arr1[i] + s;                       
-            }
+            s = Arrays.SumNeg(arr1); 
             Console.WriteLine($"Сума отрицательних еллементов массива : {s}");
-            for (int i = 0; i < arr1.Length; i++)
-            {
-                if (max < arr1[i])
-                {
-                    max = arr1[i];
-                    index = i;
-                }
-            }
+            max = Arrays.Max(arr1);
+            index = Arrays.MaxIndex(arr1);
             Console.WriteLine($"Максимальное значение : {max} [{index}]");
-            for (int i = 0; i < arr1.Length; i++)
-            {
-                if (Math.Abs(maxMod) < Math.Abs(arr1[i]))
-                {
-                    maxMod = arr1[i];
-                    indexMod = i;
-                }
-            }
-            Console.WriteLine($"Максимальное по модулю значение : {maxMod} [{indexMod}]");
-            for (int i = 0; i < arr1.Length; i++)
-            {
-                if (arr1[i] > 0)
-                    sInx = sInx + i;
-            }
+            maxMod = Arrays.MaxMod(arr1);
+            Console.WriteLine($"Максимальное по модулю значение : {maxMod}");
+            sInx = Arrays.SumPositive(arr1);
             Console.WriteLine($"Сума индексов положительных елементов: {sInx}");
-            for (int i = 0; i < arr1.Length; i++)
-            {
-                if (arr1[i] == (long)arr1[i])
-                {
-                    c = c + 1;
-                }
-            }
+            c = Arrays.NumbIntegers(arr1);
             Console.WriteLine($"Количество целых чисел: {c}");
         } 
     }
